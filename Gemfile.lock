@@ -369,7 +369,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   byebug
-  capybara
+  capybara (~> 3.40)
   carrierwave (~> 3.0)
   debug
   devise (~> 4.9)
@@ -390,7 +390,7 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   sassc-rails
-  selenium-webdriver
+  selenium-webdriver (~> 4.20.0)
   sidekiq
   sidekiq-scheduler
   sprockets-rails
