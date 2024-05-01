@@ -367,6 +367,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap
   byebug
   capybara (~> 3.40)

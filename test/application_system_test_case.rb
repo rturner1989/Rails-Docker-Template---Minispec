@@ -4,6 +4,7 @@ require 'test_helper'
 require 'selenium/webdriver'
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   include Devise::Test::IntegrationHelpers
+  include Warden::Test::Helpers
 
   driven_by :remote_selenium
 
