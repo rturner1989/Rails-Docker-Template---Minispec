@@ -6,13 +6,17 @@ echo "================="
 # Adds a default .env file if there isn't one already
 if [ ! -f ".env" ]; then
   echo "Create .env file"
-  echo "DB_USER=user
+  echo "DB_USER=root
 DB_PASSWORD=somepassword
 DB_HOST=db
 DB_PORT=3306
-DB_DATABASE=template_development
 REDIS_URL_SIDEKIQ=redis://redis:6379/12
-REDIS_URL=redis://redis:6379" > .env
+REDIS_URL=redis://redis:6379
+
+HUB_URL: http://selenium-hub:4444/wd/hub
+SE_EVENT_BUS_HOST=selenium-hub
+SE_EVENT_BUS_PUBLISH_PORT=4442
+SE_EVENT_BUS_SUBSCRIBE_PORT=4443" > .env
 else
   echo "Using pre-created .env file"
 fi
