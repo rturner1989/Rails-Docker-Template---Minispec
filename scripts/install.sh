@@ -10,7 +10,7 @@ if [ ! -f ".env" ]; then
 DB_PASSWORD=somepassword
 DB_HOST=db
 DB_PORT=3306
-REDIS_URL_SIDEKIQ=redis://redis:6379/12
+REDIS_URL_SIDEKIQ=redis://redis:6379/0
 REDIS_URL=redis://redis:6379/1
 
 HUB_URL: http://selenium-hub:4444/wd/hub
