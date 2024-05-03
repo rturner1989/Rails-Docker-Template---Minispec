@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   app:
     build:
@@ -8,26 +6,44 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/template
-      - node_modules:/template/node_modules
+      - .:/minitest_template
+      - node_modules:/minitest_template/node_modules
     depends_on:
-      - db
+      - db_rails
       - selenium-hub
     restart: always
     tty: true
     stdin_open: true
     env_file:
       - .env
-
-  db:
-    image: mysql:latest
+  db_rails:
+    image: mysql:8
+    volumes:
+      - mysql_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
     ports:
-      - "3306:3306"
+      - "${DB_RAILS_PORT_EXT}:${DB_RAILS_PORT_INT}"
+    cap_add:
+      - "SYS_NICE"
+  redis:
+    image: "redis:latest"
+    command: redis-server
+    ports:
+      - "6379:6379"
     volumes:
-      - mysql_data:/var/lib/mysql
-
+      - "redis:/data"
+  sidekiq:
+    build: .
+    command: bundle exec sidekiq
+    volumes:
+      - ".:/minitest_template"
+      - "/minitest_template/tmp"
+    depends_on:
+      - redis
+    env_file:
+      - .env
+  # Unit tests
   selenium-hub:
     image: selenium/hub:latest
     container_name: selenium-hub
@@ -59,26 +75,6 @@ services:
       - selenium-hub
     env_file:
       - .env
-
-  redis:
-    image: "redis:latest"
-    command: redis-server
-    ports:
-      - "6379:6379"
-    volumes:
-      - "redis:/data"
-
-  sidekiq:
-    depends_on:
-      - "db"
-      - "redis"
-    build: .
-    command: bundle exec sidekiq
-    volumes:
-      - ".:/template"
-      - "/template/tmp"
-    env_file:
-      - ".env"
 
 volumes:
   node_modules:

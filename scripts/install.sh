@@ -6,12 +6,14 @@ echo "================="
 # Adds a default .env file if there isn't one already
 if [ ! -f ".env" ]; then
   echo "Create .env file"
-  echo "DB_USER=root
+  echo "DB_USERNAME=root
 DB_PASSWORD=somepassword
-DB_HOST=db
-DB_PORT=3306
-REDIS_URL_SIDEKIQ=redis://redis:6379/0
-REDIS_URL=redis://redis:6379/1
+DB_HOST=db_rails
+DB_RAILS_PORT_EXT=3306
+DB_RAILS_PORT_INT=3306
+RAILS_ENV=development
+RAILS_MAX_THREADS=10
+REDIS_URL=redis://redis:6379
 
 HUB_URL: http://selenium-hub:4444/wd/hub
 SE_EVENT_BUS_HOST=selenium-hub
