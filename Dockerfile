@@ -2,11 +2,11 @@
 FROM ruby:3.1.2
 
 # Install dependencies
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update && \
-    apt-get install -qq -y build-essential python3 nodejs=16.* yarn g++ poppler-utils wkhtmltopdf cpanminus 
+    apt-get install -qq -y build-essential python3 nodejs=20.* yarn g++ poppler-utils wkhtmltopdf cpanminus 
 
 # Set the working directory
 # Change this to your app's name
